@@ -1,0 +1,24 @@
+//Question 2.1
+
+MEETING = 			(hello -> converse -> goodbye -> STOP).
+
+JOB = 				(arrive -> work -> leave -> JOB).
+
+GAME = 				({one, two} -> WINNING
+					|three -> lose -> GAME),
+WINNING	=			(win -> GAME).
+	
+MOVE = 				(ahead -> DIRECTION),
+DIRECTION = 		(left -> STOP
+					|right -> MOVE).
+
+DOUBLE (N=3) = 		(in[i:1..N] -> out[2*i] -> DOUBLE).
+
+// Specifying initial value of process parameter
+FOURTICK  = 		FOURTICK[3], 
+// Specifying that FOURTICK can only take paramaters with values in the range 0..3
+FOURTICK[i:0..3] = 	(when (i>0) tick -> FOURTICK[i-1]
+					|when (i==0) tick -> STOP).  	
+
+PERSON = 			(weekday -> sleep -> work ->PERSON
+					|weekend -> sleep -> {shop, play} -> PERSON).
