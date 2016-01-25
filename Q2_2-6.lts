@@ -1,0 +1,7 @@
+// Question 2.5 
+DRINKS (PRICE = 15) = 		DRINKS[0],	
+DRINKS[current:0..35] = 	(when (current >= PRICE)  dispense -> CHANGE[current]
+							|when (current < PRICE) in[5] -> DRINKS[current+5]
+							|when (current < PRICE) in[10] -> DRINKS[current+10]
+							|when (current < PRICE) in[20] -> DRINKS[current+20]),
+CHANGE[in:PRICE..35] = 	(out[in-PRICE] -> DRINKS).
