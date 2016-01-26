@@ -1,0 +1,29 @@
+// Question 2.2
+
+VARIABLE (N=2) = 		({write, read}[i:0..N] -> VARIABLE).
+
+// Question 2.3
+
+BISTABLE = 				BISTABLE[0],
+BISTABLE[state:0..1] = 	(trigger -> [state] -> BISTABLE[!state]). 
+// Writing 'state' not enclosed in [] makes LTSA treat it as an action rather than variable
+// So if you did that, arc would be labelled 'state' instead of [0] or [1]
+
+// Question 2.4
+SENSOR = 				SENSOR[5],
+SENSOR[level:0..9] = 	(level[0..1] -> low -> SENSOR[level]
+						|level[2..8] -> normal-> SENSOR[level]
+						|level[9] -> high -> SENSOR[level]).			
+
+
+// Question 2.5 
+DRINKS (PRICE = 15) = 		DRINKS[0],	
+DRINKS[current:0..30] = 	(when (current >= PRICE)  dispense -> CHANGE[current-PRICE]
+							|when (current == 10 || current == 5 || current == 0) in[5] -> DRINKS[current+5]
+							|when (current == 10 || current == 5 || current == 0) in[10] -> DRINKS[current+10]
+							|when (current == 10 || current == 5 || current == 0) in[20] -> DRINKS[current+20]),
+CHANGE[in:0..30] = 			(when (in == 0) out[0] -> DRINKS
+							|when (in >= 20) out[20] -> CHANGE[in-20]
+							|when (in >= 10 && in < 20) out[10] -> CHANGE[in-10]
+							|when (in >= 5 && in < 10) out[5] -> CHANGE[in-5]).
+
